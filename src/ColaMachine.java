@@ -41,5 +41,41 @@ public class ColaMachine {
         }
 
         System.out.println("You chose " + drinks[choice - 1]);
+        IfStatements(choice);
+        SwitchStatements(choice);
+    }
+
+    private void IfStatements(int choice) {
+        if (choice == 1) {
+            System.out.println("You chose Coke");
+        } else if (choice == 2) {
+            System.out.println("You chose Water");
+        } else if (choice == 3) {
+            System.out.println("You chose Sprite");
+        } else if (choice == 4) {
+            System.out.println("You chose Mountain Dew");
+        } else if (choice == 5) {
+            System.out.println("You chose Tea");
+        }
+    }
+
+    private void SwitchStatements(int choice) {
+        switch (choice) {
+            case 1:
+                System.out.println("You chose Coke");
+                break;
+            case 2:
+                System.out.println("You chose Water");
+                break;
+            case 3:
+                System.out.println("You chose Sprite");
+                break;
+            case 4:
+                System.out.println("You chose Mountain Dew");
+                break;
+            case 5:
+                System.out.println("You chose Tea");
+                break;
+        }
     }
 }
