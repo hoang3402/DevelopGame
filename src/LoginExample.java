@@ -1,6 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
 public class LoginExample {
 
@@ -43,8 +42,15 @@ public class LoginExample {
         registerButton.setBounds(180, 80, 80, 25);
         panel.add(registerButton);
 
-        loginButton.addActionListener(new LoginButtonListener());
-        registerButton.addActionListener(new MyButtonListener());
+        loginButton.addActionListener(e -> {
+            JButton source = (JButton) e.getSource();
+            JOptionPane.showMessageDialog(source, source.getText()
+                    + " button has been pressed");
+        });
+
+        registerButton.addActionListener(e ->
+                JOptionPane.showMessageDialog((Component) e.getSource(),
+                        "button has been pressed"));
     }
 
     public static void Main() {
@@ -52,18 +58,3 @@ public class LoginExample {
     }
 }
 
-class LoginButtonListener implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "login button has been pressed");
-    }
-}
-
-class MyButtonListener implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "register button has been pressed");
-    }
-}
