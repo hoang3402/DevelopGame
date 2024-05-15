@@ -45,6 +45,7 @@ public class LoginExample {
 
         loginButton.addActionListener(new LoginButtonListener());
         registerButton.addActionListener(new MyButtonListener());
+
     }
 
     public static void Main() {
