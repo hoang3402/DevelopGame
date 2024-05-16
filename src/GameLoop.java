@@ -35,6 +35,11 @@ public class GameLoop extends JPanel {
         racquet.move();
     }
 
+    public void gameOver() {
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
