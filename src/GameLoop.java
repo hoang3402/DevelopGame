@@ -19,7 +19,7 @@ public class GameLoop extends JPanel {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                racquet.keyReleased(e);
+                racquet.keyReleased();
             }
 
             @Override
@@ -36,7 +36,7 @@ public class GameLoop extends JPanel {
     }
 
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.ERROR_MESSAGE);
         System.exit(ABORT);
     }
 

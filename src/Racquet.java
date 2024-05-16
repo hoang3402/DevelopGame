@@ -22,7 +22,7 @@ public class Racquet {
         g.fillRect(x, Y, WIDTH, HEIGHT);
     }
 
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased() {
         xa = 0;
     }
 
