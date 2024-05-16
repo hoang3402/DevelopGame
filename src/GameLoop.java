@@ -6,21 +6,10 @@ import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 import static java.lang.Thread.sleep;
 
 public class GameLoop extends JPanel {
-    int x, y = 0;
-    int xa, ya = 1;
+    Ball ball = new Ball(this);
 
     private void move() {
-        if (x + xa < 0)
-            xa = 1;
-        if (x + xa > getWidth() - 30)
-            xa = -1;
-        if (y + ya < 0)
-            ya = 1;
-        if (y + ya > getHeight() - 30)
-            ya = -1;
-
-        x += xa;
-        y += ya;
+        ball.move();
     }
 
     @Override
@@ -29,7 +18,7 @@ public class GameLoop extends JPanel {
 
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-        graphics2D.fillOval(x, y, 30, 30);
+        ball.paint(graphics2D);
     }
 
     public static void main(String[] args) throws InterruptedException {
