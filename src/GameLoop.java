@@ -7,10 +7,20 @@ import static java.lang.Thread.sleep;
 
 public class GameLoop extends JPanel {
     int x, y = 0;
+    int xa, ya = 1;
 
     private void move() {
-        x += 1;
-        y += 1;
+        if (x + xa < 0)
+            xa = 1;
+        if (x + xa > getWidth() - 30)
+            xa = -1;
+        if (y + ya < 0)
+            ya = 1;
+        if (y + ya > getHeight() - 30)
+            ya = -1;
+
+        x += xa;
+        y += ya;
     }
 
     @Override
