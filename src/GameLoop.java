@@ -62,7 +62,8 @@ public class GameLoop extends JPanel {
     public void gameOver() {
         MyAudio.stopAll();
         MyAudio.play("GAMEOVER");
-        JOptionPane.showMessageDialog(this, "your score is: " + getScore(),
+        String player = getScore() % 2 != 0 ? "Player 1" : "Player 2";
+        JOptionPane.showMessageDialog(this, player + " wins!\nyour score is: " + getScore(),
                 "Game Over", JOptionPane.ERROR_MESSAGE);
         System.exit(ABORT);
     }
