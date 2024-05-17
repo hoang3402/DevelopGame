@@ -11,6 +11,11 @@ import static java.lang.Thread.sleep;
 public class GameLoop extends JPanel {
     Ball ball = new Ball(this);
     Racquet racquet = new Racquet(this);
+    int speed = 1;
+
+    private int getScore() {
+        return speed - 1;
+    }
 
     public GameLoop() {
         addKeyListener(new KeyListener() {
