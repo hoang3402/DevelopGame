@@ -7,6 +7,7 @@ public class Ball {
     int xa = 1;
     int ya = 1;
     private final GameLoop game;
+    private Color currentColor = Color.BLUE; // Default color
 
     public Ball(GameLoop game) {
         this.game = game;
@@ -23,6 +24,7 @@ public class Ball {
         else if (collision() != 0) {
             ya = collision() == 1 ? game.speed : -game.speed;
             game.speed++;
+            changeColor();
         } else
             changeDirection = false;
 
@@ -43,10 +45,18 @@ public class Ball {
     }
 
     public void paint(Graphics2D g) {
+        g.setColor(currentColor);
         g.fillOval(x, y, DIAMETER, DIAMETER);
     }
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, DIAMETER, DIAMETER);
+    }
+
+    private void changeColor() {
+        float r = (float) Math.random();
+        float g = (float) Math.random();
+        float b = (float) Math.random();
+        currentColor = new Color(r, g, b);
     }
 }
