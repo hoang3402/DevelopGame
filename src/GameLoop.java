@@ -1,11 +1,16 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 import static java.lang.Thread.sleep;
+
 
 public class GameLoop extends JPanel {
     Ball ball = new Ball(this);
@@ -57,11 +62,26 @@ public class GameLoop extends JPanel {
         frame.setSize(500, 500);
         frame.add(game);
         frame.setVisible(true);
+        playSound(MyAudio.BACK);
 
         while (true) {
             game.move();
             game.repaint();
             sleep(30);
         }
+    }
+
+    public static synchronized void playSound(final String sound) {
+        new Thread(() -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Objects.requireNonNull(Main.class.getResourceAsStream(sound)));
+                clip.open(inputStream);
+                clip.start();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }).start();
     }
 }
