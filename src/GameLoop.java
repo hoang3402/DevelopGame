@@ -10,7 +10,8 @@ import static java.lang.Thread.sleep;
 
 public class GameLoop extends JPanel {
     Ball ball = new Ball(this);
-    Racquet racquet = new Racquet(this);
+    Racquet racquet = new Racquet(this, 0, 0, 330);
+    Racquet racquetEnemy = new Racquet(this, 100, 0, 30);
     int speed = 1;
 
     private int getScore() {
@@ -25,12 +26,28 @@ public class GameLoop extends JPanel {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                racquet.keyReleased();
+                if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_D) {
+                    racquetEnemy.keyReleased();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    racquet.keyReleased();
+                }
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
-                racquet.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_D) {
+                    racquetEnemy.keyPressed(RacquetDirection.RIGHT);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_A) {
+                    racquetEnemy.keyPressed(RacquetDirection.LEFT);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    racquet.keyPressed(RacquetDirection.RIGHT);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    racquet.keyPressed(RacquetDirection.LEFT);
+                }
             }
         });
         setFocusable(true);
@@ -38,6 +55,7 @@ public class GameLoop extends JPanel {
 
     private void move() {
         ball.move();
+        racquetEnemy.move();
         racquet.move();
     }
 
@@ -56,13 +74,14 @@ public class GameLoop extends JPanel {
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
         ball.paint(graphics2D);
         racquet.paint(graphics2D);
+        racquetEnemy.paint(graphics2D);
     }
 
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame();
         GameLoop game = new GameLoop();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
         frame.add(game);
         frame.setVisible(true);
         MyAudio.playLoop("BACK");

@@ -22,9 +22,8 @@ public class Ball {
             ya = game.speed;
         else if (y + ya > game.getHeight() - DIAMETER)
             game.gameOver();
-        else if (collision()){
-            ya = -game.speed;
-            y = game.racquet.getTopY() - DIAMETER;
+        else if (collision() != 0) {
+            ya = collision() == 1 ? game.speed : -game.speed;
             game.speed++;
         } else
             changeDirection = false;
@@ -36,8 +35,13 @@ public class Ball {
         y = y + ya;
     }
 
-    private boolean collision() {
-        return game.racquet.getBounds().intersects(getBounds());
+    // 0 khong cham, 1 cham o tren, 2 cham o duoi
+    private int collision() {
+        if (game.racquet.getBounds().intersects(getBounds()))
+            return 2;
+        if (game.racquetEnemy.getBounds().intersects(getBounds()))
+            return 1;
+        return 0;
     }
 
     public void paint(Graphics2D g) {
