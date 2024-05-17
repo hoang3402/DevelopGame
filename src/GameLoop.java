@@ -62,7 +62,8 @@ public class GameLoop extends JPanel {
     public void gameOver() {
         MyAudio.stopAll();
         MyAudio.play("GAMEOVER");
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "your score is: " + getScore(),
+                "Game Over", JOptionPane.ERROR_MESSAGE);
         System.exit(ABORT);
     }
 
@@ -75,6 +76,10 @@ public class GameLoop extends JPanel {
         ball.paint(graphics2D);
         racquet.paint(graphics2D);
         racquetEnemy.paint(graphics2D);
+
+        graphics2D.setColor(Color.GRAY);
+        graphics2D.setFont(new Font("Verdana", Font.BOLD, 30));
+        graphics2D.drawString(String.valueOf(getScore()), 10, 30);
     }
 
     public static void main(String[] args) throws InterruptedException {

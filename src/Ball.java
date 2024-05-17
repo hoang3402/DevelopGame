@@ -18,10 +18,8 @@ public class Ball {
             xa = game.speed;
         else if (x + xa > game.getWidth() - DIAMETER)
             xa = -game.speed;
-        else if (y + ya < 0)
-            ya = game.speed;
-        else if (y + ya > game.getHeight() - DIAMETER)
-            game.gameOver();
+        else if (y + ya < 0 || y + ya > game.getHeight() - DIAMETER)
+            game.gameOver(); // can change to gameWin
         else if (collision() != 0) {
             ya = collision() == 1 ? game.speed : -game.speed;
             game.speed++;
