@@ -22,6 +22,7 @@ public class Ball {
         if (y + ya > game.getHeight() - DIAMETER)
             game.gameOver();
         if (collision()) {
+            MyAudio.play("BALL");
             ya = -1;
             y = game.racquet.getTopY() - DIAMETER;
         }
