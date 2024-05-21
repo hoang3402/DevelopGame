@@ -3,15 +3,13 @@ import java.awt.*;
 
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
-import static java.lang.Thread.sleep;
 
 public class Main extends JPanel {
 
-    Ball ball = new Ball(250, 350, 1, 1);
+    Ball ball = new Ball(250, 250, 1, -1, this);
 
-    private static void initScreen() {
+    private static void initScreen(Main game) {
         JFrame frame = new JFrame();
-        Main game = new Main();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.add(game);
@@ -32,16 +30,16 @@ public class Main extends JPanel {
     }
 
     private void gameLoop() throws InterruptedException {
-
         while (true) {
             move();
-            sleep(30);
+            repaint();
+            Thread.sleep(30);
         }
     }
 
     public static void main(String[] args) {
-        initScreen();
         Main g = new Main();
+        initScreen(g);
         try {
             g.gameLoop();
         } catch (InterruptedException e) {

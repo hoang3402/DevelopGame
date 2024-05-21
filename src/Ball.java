@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,21 +10,33 @@ public class Ball extends JPanel {
     int xSpeed;
     int ySpeed;
     final int RADIUS = 30;
-    private BufferedImage image;
+    private Image image;
+    final private Main game;
 
-    public Ball(int x, int y, int xSpeed, int ySpeed) {
+    public Ball(int x, int y, int xSpeed, int ySpeed, Main game) {
         this.x = x;
         this.y = y;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.game = game;
         try {
-            image = ImageIO.read(new File("src/assets/58-Breakout-Tiles.png"));
+            var _temp = ImageIO.read(new File("src/assets/58-Breakout-Tiles.png"));
+            image = _temp.getScaledInstance(RADIUS, RADIUS, Image.SCALE_SMOOTH);
         } catch (IOException ex) {
-            System.out.println("load failed: " + ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
         }
     }
 
     public void move() {
+
+        // check if ball is out of screen
+        if (x < 0 || x > game.getWidth() - RADIUS) {
+            xSpeed *= -1;
+        }
+        if (y < 0 || y > game.getHeight() - RADIUS) {
+            ySpeed *= -1;
+        }
+
         x += xSpeed;
         y += ySpeed;
     }
@@ -34,7 +45,6 @@ public class Ball extends JPanel {
         super.paint(g);
 
         // scale size image
-        var _image = image.getScaledInstance(RADIUS, RADIUS, Image.SCALE_SMOOTH);
-        g.drawImage(_image, x, y, this);
+        g.drawImage(image, x, y, this);
     }
 }
