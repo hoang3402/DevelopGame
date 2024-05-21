@@ -44,7 +44,6 @@ public class Ball extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        // scale size image
         g.drawImage(image, x, y, this);
     }
 }
