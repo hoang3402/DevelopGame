@@ -3,13 +3,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Ball extends JPanel {
     int x;
     int y;
     int xSpeed;
     int ySpeed;
+
     final int DIAMETER = 30;
+
     private Image image;
     private final Main game;
 
@@ -37,9 +40,20 @@ public class Ball extends JPanel {
             ySpeed *= -1;
         }
 
-        if (collision()) {
+        if (collisionWithRacquet()) {
             ySpeed *= -1;
             game.level += 1;
+        }
+
+        for (int i = 0; i < game.bricks.length; i++) {
+            Brick brick = game.bricks[i];
+            if (brick == null) {
+                continue;
+            }
+            if (collisionWithBrick(brick)) {
+                ySpeed *= -1;
+                game.removeBrick(i);
+            }
         }
 
         x += xSpeed;
@@ -56,8 +70,11 @@ public class Ball extends JPanel {
         return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
 
-    private boolean collision() {
-        if (game.racquet.getBounds().intersects(getBounds())) return true;
-        return false;
+    private boolean collisionWithRacquet() {
+        return game.racquet.getBounds().intersects(getBounds());
+    }
+
+    private boolean collisionWithBrick(Brick brick) {
+        return brick.getBounds().intersects(getBounds());
     }
 }

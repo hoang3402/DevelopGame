@@ -8,11 +8,16 @@ import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 public class Main extends JPanel {
 
+    final int BrickPerRow = 7;
+
     Ball ball = new Ball(250, 250, 1, -1, this);
     Racquet racquet = new Racquet(250, 310, 16, 86, 0, this);
+    Brick[] bricks = new Brick[20];
+
     int level = 1;
 
     public Main() {
+        // blind key
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -38,6 +43,14 @@ public class Main extends JPanel {
                 }
             }
         });
+
+        // init bricks
+        for (int i = 0; i < bricks.length; i++) {
+            int x = i % BrickPerRow * 64 + 8;
+            int y = i / BrickPerRow * 21 + 8;
+            bricks[i] = new Brick(x, y);
+        }
+
         setFocusable(true);
     }
 
@@ -62,6 +75,17 @@ public class Main extends JPanel {
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
         ball.paint(graphics2D);
         racquet.paint(graphics2D);
+
+        for (Brick brick : bricks) {
+            if (brick == null) {
+                continue;
+            }
+            brick.paint(graphics2D);
+        }
+    }
+
+    public void removeBrick(int i) {
+        bricks[i] = null;
     }
 
     private void gameLoop() throws InterruptedException {

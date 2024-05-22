@@ -12,7 +12,9 @@ public class Racquet extends JPanel {
     int locationY;
     int height;
     int width;
+
     int speed;
+
     private Image image;
     final private Main game;
 
