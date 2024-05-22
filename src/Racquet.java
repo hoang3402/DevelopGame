@@ -26,14 +26,14 @@ public class Racquet extends JPanel {
 
         try {
             var _temp = ImageIO.read(new File("src/assets/56-Breakout-Tiles.png"));
-            image = _temp.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            image = _temp.getScaledInstance(width, height, Image.SCALE_DEFAULT);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
     public void move() {
-        if (locationX + speed > 0 && locationX + height < game.getWidth() - width) {
+        if (locationX + speed > 0 && locationX + speed < game.getWidth() - width) {
             locationX += speed;
         }
     }
@@ -56,10 +56,6 @@ public class Racquet extends JPanel {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(locationX, locationY, WIDTH, HEIGHT);
-    }
-
-    public int getTopY() {
-        return locationY;
+        return new Rectangle(locationX, locationY, width, height);
     }
 }

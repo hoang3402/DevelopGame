@@ -9,14 +9,13 @@ import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 public class Main extends JPanel {
 
     Ball ball = new Ball(250, 250, 1, -1, this);
-    Racquet racquet = new Racquet(250, 310, 30, 60, 0, this);
+    Racquet racquet = new Racquet(250, 310, 16, 86, 0, this);
     int level = 1;
 
     public Main() {
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
@@ -31,7 +30,12 @@ public class Main extends JPanel {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                racquet.keyReleased();
+                if (e.getKeyCode() == KeyEvent.VK_LEFT ||
+                        e.getKeyCode() == KeyEvent.VK_A ||
+                        e.getKeyCode() == KeyEvent.VK_RIGHT ||
+                        e.getKeyCode() == KeyEvent.VK_D) {
+                    racquet.keyReleased();
+                }
             }
         });
         setFocusable(true);
