@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Ball extends JPanel {
     int x;
@@ -36,13 +35,18 @@ public class Ball extends JPanel {
         if (x < 0 || x > game.getWidth() - DIAMETER) {
             xSpeed *= -1;
         }
-        if (y < 0 || y > game.getHeight() - DIAMETER) {
+        if (y < 0) {
             ySpeed *= -1;
+        }
+
+        if (y > game.getHeight() - DIAMETER) {
+            game.gameOver();
         }
 
         if (collisionWithRacquet()) {
             ySpeed *= -1;
             game.level += 1;
+            y = game.racquet.getLocationY() - DIAMETER;
         }
 
         for (int i = 0; i < game.bricks.length; i++) {
@@ -53,11 +57,15 @@ public class Ball extends JPanel {
             if (collisionWithBrick(brick)) {
                 ySpeed *= -1;
                 game.removeBrick(i);
+                game.score += 1;
+            }
+            if (game.score == game.bricks.length) {
+                game.gameWin();
             }
         }
 
-        x += xSpeed;
-        y += ySpeed;
+        x += xSpeed * game.level;
+        y += ySpeed * game.level;
     }
 
     public void paint(Graphics g) {

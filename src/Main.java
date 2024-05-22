@@ -11,10 +11,11 @@ public class Main extends JPanel {
     final int BrickPerRow = 7;
 
     Ball ball = new Ball(250, 250, 1, -1, this);
-    Racquet racquet = new Racquet(250, 310, 16, 86, 0, this);
-    Brick[] bricks = new Brick[20];
+    Racquet racquet = new Racquet(250, 300, 16, 86, 0, this);
+    Brick[] bricks = new Brick[21];
 
     int level = 1;
+    int score = 0;
 
     public Main() {
         // blind key
@@ -46,8 +47,8 @@ public class Main extends JPanel {
 
         // init bricks
         for (int i = 0; i < bricks.length; i++) {
-            int x = i % BrickPerRow * 64 + 8;
-            int y = i / BrickPerRow * 21 + 8;
+            int x = i % BrickPerRow * 64 + 22;
+            int y = i / BrickPerRow * 21 + 22;
             bricks[i] = new Brick(x, y);
         }
 
@@ -82,10 +83,31 @@ public class Main extends JPanel {
             }
             brick.paint(graphics2D);
         }
+
+        g.drawString("Score: " + score, 10, 20);
+        g.drawString("Level: " + level, 400, 20);
     }
 
     public void removeBrick(int i) {
         bricks[i] = null;
+    }
+
+    public void gameOver() {
+        System.out.println("Game Over");
+        JOptionPane.showMessageDialog(this,
+                "Score: " + score,
+                "Game Over",
+                JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
+    }
+
+    public void gameWin() {
+        System.out.println("Game Win");
+        JOptionPane.showMessageDialog(this,
+                "Score: " + score,
+                "Game Win",
+                JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
     private void gameLoop() throws InterruptedException {

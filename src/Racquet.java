@@ -60,4 +60,8 @@ public class Racquet extends JPanel {
     public Rectangle getBounds() {
         return new Rectangle(locationX, locationY, width, height);
     }
+
+    public int getLocationY() {
+        return locationY;
+    }
 }
