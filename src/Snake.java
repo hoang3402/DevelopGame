@@ -1,16 +1,18 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 
-public class Snake extends JPanel {
+public class Snake extends JPanel implements KeyListener {
 
     Tile Head;
     Tile[] Body;
     Image headDown, headLeft, headRight, headUp, tail;
-    Direction direction = Direction.RIGHT;
+    Direction direction;
 
     private void loadImage() throws IOException {
         var _headDown = ImageIO.read(new File("src/assets/headDown.png"));
@@ -27,6 +29,7 @@ public class Snake extends JPanel {
     }
 
     public Snake(int locationX, int locationY) {
+        direction = Direction.RIGHT;
         Head = new Tile(locationX, locationY);
         Body = new Tile[100];
         try {
@@ -34,6 +37,23 @@ public class Snake extends JPanel {
         } catch (IOException e) {
             System.out.println("Failed to load image " + e.getMessage());
             throw new RuntimeException(e);
+        }
+    }
+
+    public void move() {
+        switch (direction) {
+            case UP:
+                Head.y -= Main.BLOCK_SIZE;
+                break;
+            case DOWN:
+                Head.y += Main.BLOCK_SIZE;
+                break;
+            case LEFT:
+                Head.x -= Main.BLOCK_SIZE;
+                break;
+            case RIGHT:
+                Head.x += Main.BLOCK_SIZE;
+                break;
         }
     }
 
@@ -50,7 +70,7 @@ public class Snake extends JPanel {
             case LEFT:
                 g.drawImage(headLeft, Head.x, Head.y, this);
                 break;
-            default:
+            case RIGHT:
                 g.drawImage(headRight, Head.x, Head.y, this);
                 break;
         }
@@ -60,5 +80,32 @@ public class Snake extends JPanel {
                 g.drawImage(tail, tile.x, tile.y, this);
             }
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                direction = Direction.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+                direction = Direction.DOWN;
+                break;
+            case KeyEvent.VK_LEFT:
+                direction = Direction.LEFT;
+                break;
+            default:
+                direction = Direction.RIGHT;
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }

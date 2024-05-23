@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -12,6 +14,7 @@ import static java.lang.Thread.sleep;
 public class Game extends JPanel {
 
     int score = 0;
+    int tick = 100;
     Image title, fruit;
 
     Snake snake = new Snake(400, 400);
@@ -27,6 +30,21 @@ public class Game extends JPanel {
         setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
         setBackground(Color.BLACK);
 
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                snake.keyPressed(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+        setFocusable(true);
         System.out.println("Loaded");
     }
 
@@ -36,7 +54,7 @@ public class Game extends JPanel {
         while (true) {
             move();
             repaint();
-            sleep(30);
+            sleep(tick);
         }
     }
 
@@ -46,12 +64,15 @@ public class Game extends JPanel {
     }
 
     private void move() {
-
+        snake.move();
     }
 
     private void placeFruit() {
         Random random = new Random();
-        fruitTile = new Tile(random.nextInt(Main.WIDTH / Main.BLOCK_SIZE), random.nextInt(Main.HEIGHT / Main.BLOCK_SIZE));
+        fruitTile = new Tile(
+                random.nextInt(Main.WIDTH / Main.BLOCK_SIZE),
+                random.nextInt(Main.HEIGHT / Main.BLOCK_SIZE)
+        );
     }
 
     @Override
