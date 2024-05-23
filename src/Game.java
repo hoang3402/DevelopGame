@@ -14,10 +14,10 @@ import static java.lang.Thread.sleep;
 public class Game extends JPanel {
 
     int score = 0;
-    int tick = 100;
+    int tick = 1000;
     Image title, fruit;
 
-    Snake snake = new Snake(400, 400);
+    Snake snake = new Snake(0, 0, this);
     Tile fruitTile;
 
     public Game() throws IOException {
@@ -67,7 +67,7 @@ public class Game extends JPanel {
         snake.move();
     }
 
-    private void placeFruit() {
+    void placeFruit() {
         Random random = new Random();
         fruitTile = new Tile(
                 random.nextInt(Main.WIDTH / Main.BLOCK_SIZE),
@@ -99,5 +99,9 @@ public class Game extends JPanel {
 
         graphics2D.setColor(Color.WHITE);
         graphics2D.drawString("Score: " + score, 10, 85);
+    }
+
+    public boolean collides(Tile a, Tile b) {
+        return a.x == b.x && a.y == b.y;
     }
 }

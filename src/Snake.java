@@ -5,14 +5,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Snake extends JPanel implements KeyListener {
 
     Tile Head;
-    Tile[] Body;
+    ArrayList<Tile> Body;
     Image headDown, headLeft, headRight, headUp, tail;
     Direction direction;
+    Game game;
 
     private void loadImage() throws IOException {
         var _headDown = ImageIO.read(new File("src/assets/headDown.png"));
@@ -28,10 +30,11 @@ public class Snake extends JPanel implements KeyListener {
         tail = _tail.getScaledInstance(Main.BLOCK_SIZE, Main.BLOCK_SIZE, Image.SCALE_SMOOTH);
     }
 
-    public Snake(int locationX, int locationY) {
+    public Snake(int locationX, int locationY, Game game) {
         direction = Direction.RIGHT;
+        this.game = game;
         Head = new Tile(locationX, locationY);
-        Body = new Tile[100];
+        Body = new ArrayList<>();
         try {
             loadImage();
         } catch (IOException e) {
@@ -43,17 +46,24 @@ public class Snake extends JPanel implements KeyListener {
     public void move() {
         switch (direction) {
             case UP:
-                Head.y -= Main.BLOCK_SIZE;
+                Head.y -= 1;
                 break;
             case DOWN:
-                Head.y += Main.BLOCK_SIZE;
+                Head.y += 1;
                 break;
             case LEFT:
-                Head.x -= Main.BLOCK_SIZE;
+                Head.x -= 1;
                 break;
             case RIGHT:
-                Head.x += Main.BLOCK_SIZE;
+                Head.x += 1;
                 break;
+        }
+
+        if (game.collides(Head, game.fruitTile)) {
+            System.out.println("Head ate fruit: " + Head.x + ", " + Head.y);
+            Body.add(new Tile(Head.x, Head.y));
+            game.score++;
+            game.placeFruit();
         }
     }
 
@@ -62,22 +72,22 @@ public class Snake extends JPanel implements KeyListener {
         super.paint(g);
         switch (direction) {
             case UP:
-                g.drawImage(headUp, Head.x, Head.y, this);
+                g.drawImage(headUp, Head.x * Main.BLOCK_SIZE, Head.y * Main.BLOCK_SIZE, this);
                 break;
             case DOWN:
-                g.drawImage(headDown, Head.x, Head.y, this);
+                g.drawImage(headDown, Head.x * Main.BLOCK_SIZE, Head.y * Main.BLOCK_SIZE, this);
                 break;
             case LEFT:
-                g.drawImage(headLeft, Head.x, Head.y, this);
+                g.drawImage(headLeft, Head.x * Main.BLOCK_SIZE, Head.y * Main.BLOCK_SIZE, this);
                 break;
             case RIGHT:
-                g.drawImage(headRight, Head.x, Head.y, this);
+                g.drawImage(headRight, Head.x * Main.BLOCK_SIZE, Head.y * Main.BLOCK_SIZE, this);
                 break;
         }
 
         for (Tile tile : Body) {
             if (tile != null) {
-                g.drawImage(tail, tile.x, tile.y, this);
+                g.drawImage(tail, tile.x * Main.BLOCK_SIZE, tile.y * Main.BLOCK_SIZE, this);
             }
         }
     }
