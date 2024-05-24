@@ -104,7 +104,7 @@ public class Snake extends JPanel implements KeyListener {
         }
 
         if (Head.x < 0 || Head.x >= Main.WIDTH / Main.BLOCK_SIZE ||
-                Head.y < 0 || Head.y >= Main.HEIGHT / Main.BLOCK_SIZE) {
+                Head.y < 4 || Head.y >= Main.HEIGHT / Main.BLOCK_SIZE - 2) {
             game.gameOver();
         }
     }
