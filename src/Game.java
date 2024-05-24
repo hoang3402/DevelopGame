@@ -18,7 +18,7 @@ public class Game extends JPanel {
     boolean lock = false;
 
     Image title, fruit;
-    Snake snake = new Snake(0, 0, this);
+    Snake snake = new Snake(5, 5, this);
     Tile fruitTile;
 
     public Game() throws IOException {

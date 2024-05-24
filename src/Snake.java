@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 
 public class Snake extends JPanel implements KeyListener {
 
@@ -45,9 +47,22 @@ public class Snake extends JPanel implements KeyListener {
 
     public void move() {
 
+        // move with tick delay
+        if (!game.lock) {
+            game.lock = true;
+            new Thread(() -> {
+                try {
+                    sleep(game.tick);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                game.lock = false;
+            }).start();
+        }
+
         if (game.collides(Head, game.fruitTile)) {
             System.out.println("Snake ate fruit: " + Head.x + ", " + Head.y);
-            game.tick -= (int) (double) (game.score / 10);
+            game.tick -= game.tick <= 100 ? 0 : 10;
             Body.add(new Tile(game.fruitTile.x, game.fruitTile.y));
             game.score++;
             game.placeFruit();
