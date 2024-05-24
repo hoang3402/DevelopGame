@@ -85,13 +85,20 @@ public class Game extends JPanel {
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
 
         // grid
+//        graphics2D.setColor(Color.WHITE);
+//        for (int i = 0; i < Main.WIDTH / Main.BLOCK_SIZE; i++) {
+//            graphics2D.drawLine(i * Main.BLOCK_SIZE, 4 * Main.BLOCK_SIZE, i * Main.BLOCK_SIZE, Main.HEIGHT - Main.BLOCK_SIZE * 2);
+//        }
+//        for (int i = 4; i < Main.WIDTH / Main.BLOCK_SIZE - 1; i++) {
+//            graphics2D.drawLine(0, i * Main.BLOCK_SIZE, Main.WIDTH, i * Main.BLOCK_SIZE);
+//        }
+
+        // draw only 4 line
         graphics2D.setColor(Color.WHITE);
-        for (int i = 0; i < Main.WIDTH / Main.BLOCK_SIZE; i++) {
-            graphics2D.drawLine(i * Main.BLOCK_SIZE, 4 * Main.BLOCK_SIZE, i * Main.BLOCK_SIZE, Main.HEIGHT - Main.BLOCK_SIZE * 2);
-        }
-        for (int i = 4; i < Main.WIDTH / Main.BLOCK_SIZE - 1; i++) {
-            graphics2D.drawLine(0, i * Main.BLOCK_SIZE, Main.WIDTH, i * Main.BLOCK_SIZE);
-        }
+        graphics2D.drawLine(0, 4 * Main.BLOCK_SIZE, Main.WIDTH, 4 * Main.BLOCK_SIZE);
+        graphics2D.drawLine(0, Main.HEIGHT - Main.BLOCK_SIZE * 2, Main.WIDTH, Main.HEIGHT - Main.BLOCK_SIZE * 2);
+        graphics2D.drawLine(0, 4 * Main.BLOCK_SIZE, 0, Main.HEIGHT - Main.BLOCK_SIZE * 2);
+        graphics2D.drawLine(Main.WIDTH - 1, 4 * Main.BLOCK_SIZE, Main.WIDTH - 1, Main.HEIGHT - Main.BLOCK_SIZE * 2);
 
         graphics2D.drawImage(title, 0, 0, this);
 
