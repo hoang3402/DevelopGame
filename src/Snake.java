@@ -46,12 +46,12 @@ public class Snake extends JPanel implements KeyListener {
     public void move() {
 
         if (game.collides(Head, game.fruitTile)) {
-            System.out.println("Head ate fruit: " + Head.x + ", " + Head.y);
+            System.out.println("Snake ate fruit: " + Head.x + ", " + Head.y);
+            game.tick -= (int) (double) (game.score / 10);
             Body.add(new Tile(game.fruitTile.x, game.fruitTile.y));
             game.score++;
             game.placeFruit();
         }
-
 
         // move snake body
         for (int i = Body.size() - 1; i >= 0; i--) {
@@ -86,6 +86,11 @@ public class Snake extends JPanel implements KeyListener {
             if (game.collides(Head, tile)) {
                 game.gameOver();
             }
+        }
+
+        if (Head.x < 0 || Head.x >= Main.WIDTH / Main.BLOCK_SIZE ||
+                Head.y < 0 || Head.y >= Main.HEIGHT / Main.BLOCK_SIZE) {
+            game.gameOver();
         }
     }
 

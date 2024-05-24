@@ -14,7 +14,7 @@ import static java.lang.Thread.sleep;
 public class Game extends JPanel {
 
     int score = 0;
-    int tick = 100;
+    int tick = 500;
     boolean lock = false;
 
     Image title, fruit;
