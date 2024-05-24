@@ -14,9 +14,10 @@ import static java.lang.Thread.sleep;
 public class Game extends JPanel {
 
     int score = 0;
-    int tick = 1000;
-    Image title, fruit;
+    int tick = 100;
+    boolean lock = false;
 
+    Image title, fruit;
     Snake snake = new Snake(0, 0, this);
     Tile fruitTile;
 
@@ -54,11 +55,12 @@ public class Game extends JPanel {
         while (true) {
             move();
             repaint();
+            lock = false;
             sleep(tick);
         }
     }
 
-    private void gameOver() {
+    public void gameOver() {
         System.out.println("Game over");
         System.exit(0);
     }

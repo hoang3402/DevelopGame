@@ -44,6 +44,29 @@ public class Snake extends JPanel implements KeyListener {
     }
 
     public void move() {
+
+        if (game.collides(Head, game.fruitTile)) {
+            System.out.println("Head ate fruit: " + Head.x + ", " + Head.y);
+            Body.add(new Tile(game.fruitTile.x, game.fruitTile.y));
+            game.score++;
+            game.placeFruit();
+        }
+
+
+        // move snake body
+        for (int i = Body.size() - 1; i >= 0; i--) {
+            Tile current = Body.get(i);
+
+            if (i == 0) {
+                current.x = Head.x;
+                current.y = Head.y;
+            } else {
+                Tile prev = Body.get(i - 1);
+                current.x = prev.x;
+                current.y = prev.y;
+            }
+        }
+
         switch (direction) {
             case UP:
                 Head.y -= 1;
@@ -59,11 +82,10 @@ public class Snake extends JPanel implements KeyListener {
                 break;
         }
 
-        if (game.collides(Head, game.fruitTile)) {
-            System.out.println("Head ate fruit: " + Head.x + ", " + Head.y);
-            Body.add(new Tile(Head.x, Head.y));
-            game.score++;
-            game.placeFruit();
+        for (Tile tile : Body) {
+            if (game.collides(Head, tile)) {
+                game.gameOver();
+            }
         }
     }
 
@@ -86,9 +108,7 @@ public class Snake extends JPanel implements KeyListener {
         }
 
         for (Tile tile : Body) {
-            if (tile != null) {
-                g.drawImage(tail, tile.x * Main.BLOCK_SIZE, tile.y * Main.BLOCK_SIZE, this);
-            }
+            g.drawImage(tail, tile.x * Main.BLOCK_SIZE, tile.y * Main.BLOCK_SIZE, this);
         }
     }
 
@@ -99,18 +119,23 @@ public class Snake extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (game.lock) return;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                direction = Direction.UP;
+                direction = direction != Direction.DOWN ? Direction.UP : Direction.DOWN;
+                game.lock = true;
                 break;
             case KeyEvent.VK_DOWN:
-                direction = Direction.DOWN;
+                direction = direction != Direction.UP ? Direction.DOWN : Direction.UP;
+                game.lock = true;
                 break;
             case KeyEvent.VK_LEFT:
-                direction = Direction.LEFT;
+                direction = direction != Direction.RIGHT ? Direction.LEFT : Direction.RIGHT;
+                game.lock = true;
                 break;
             default:
-                direction = Direction.RIGHT;
+                direction = direction != Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
+                game.lock = true;
                 break;
         }
     }
