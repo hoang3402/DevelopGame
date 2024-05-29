@@ -4,26 +4,20 @@ import java.awt.*;
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
-public class GameBoard extends JPanel {
+public class GameBoard extends JPanel implements Runnable {
 
-    private int WIDTH, HEIGHT;
+    private final Thread gameThread = new Thread(this);
 
-    public GameBoard(int WIDTH, int HEIGHT) {
-        this.WIDTH = WIDTH;
-        this.HEIGHT = HEIGHT;
-        setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
-        setFocusable(true);
+    public GameBoard() {
+        setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+        setLayout(null);
     }
 
-    public void start() throws InterruptedException {
-        while (true) {
-            move();
-            repaint();
-            Thread.sleep(30);
-        }
+    public void start() {
+        gameThread.start();
     }
 
-    private void move() {
+    private void update() {
     }
 
     @Override
@@ -33,13 +27,28 @@ public class GameBoard extends JPanel {
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
 
-        // draw grid
-        g.setColor(Color.black);
-        for (int i = 0; i < WIDTH; i += Main.TILE_SIZE) {
-            g.drawLine(i, 0, i, HEIGHT);
-        }
-        for (int i = 0; i < HEIGHT; i += Main.TILE_SIZE) {
-            g.drawLine(0, i, WIDTH, i);
+
+    }
+
+    @Override
+    public void run() {
+
+        // GAME LOOP
+        var drawInterval = 1000000000 / Main.FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
+        while (gameThread.isAlive()) {
+            currentTime = System.nanoTime();
+            delta += (double) (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                update();
+                repaint();
+                delta--;
+            }
         }
     }
 }
