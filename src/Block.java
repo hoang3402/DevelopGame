@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Block {
 
-    Position startOffset = new Position(GameBoard.BLOCK_START_X, GameBoard.BLOCK_START_Y);
+    Position startOffset;
     Position currentOffset;
     Position[][] tiles;
     int state = 0;
 
-    public Block() {
-        currentOffset = startOffset;
+    public Block(Position position) {
+        startOffset = position;
+        currentOffset = position;
     }
 
     public void paint(Graphics2D graphics2D) {
@@ -37,8 +38,8 @@ public class Block {
         List<Position> result = new ArrayList<>();
         for (Position tile : this.tiles[state]) {
             result.add(new Position(
-                    tile.x + currentOffset.x,
-                    tile.y + currentOffset.y
+                    tile.x * Main.TILE_SIZE + currentOffset.x,
+                    tile.y * Main.TILE_SIZE + currentOffset.y
             ));
         }
         return result;

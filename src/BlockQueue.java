@@ -8,12 +8,12 @@ public class BlockQueue {
     public BlockQueue() {
         this.blocks = new Block[]{
                 new IBlock(),
-//            new JBlock(),
-//            new LBlock(),
-//            new OBlock(),
-//            new SBlock(),
-//            new TBlock(),
-//            new ZBlock()
+                new JBlock(),
+                new LBlock(),
+                new OBlock(),
+                new SBlock(),
+                new TBlock(),
+                new ZBlock()
         };
     }
 
