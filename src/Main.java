@@ -7,7 +7,7 @@ public class Main {
     final static int TILE_SIZE = 30;
     final static int FPS = 60;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Tetris");
 
         GameBoard gameBoard = new GameBoard();
