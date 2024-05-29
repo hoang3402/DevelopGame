@@ -32,13 +32,15 @@ public class GameBoard extends JPanel implements Runnable {
     }
 
     private void drawNextBlock(Graphics2D graphics2D) {
-        graphics2D.drawString("Next Block", RIGHT_X + 100, TOP_Y + 220);
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
+        graphics2D.drawString("Next", RIGHT_X + 165, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawRect(RIGHT_X + 100, TOP_Y, 200, 200);
     }
 
     private void drawHoldBlock(Graphics2D graphics2D) {
-        graphics2D.drawString("Hold Block", LEFT_X - 300, TOP_Y + 220);
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
+        graphics2D.drawString("Hold", LEFT_X - 230, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawRect(LEFT_X - 300, TOP_Y, 200, 200);
     }
