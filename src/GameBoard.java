@@ -10,6 +10,7 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
     private final static int BOARD_WIDTH = 360;
     private final static int BOARD_HEIGHT = 600;
+
     public static int LEFT_X;
     public static int RIGHT_X;
     public static int TOP_Y;
@@ -25,7 +26,7 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
         LEFT_X = (Main.WIDTH - BOARD_WIDTH) / 2;
         RIGHT_X = LEFT_X + BOARD_WIDTH;
-        TOP_Y = 50;
+        TOP_Y = 60;
         BOTTOM_Y = TOP_Y + BOARD_HEIGHT;
 
         BLOCK_START_X = LEFT_X + BOARD_WIDTH / 2 - Main.TILE_SIZE;
@@ -38,13 +39,11 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
         setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
         setLayout(null);
-
-        start();
     }
 
     private void drawBoard(Graphics2D graphics2D) {
         graphics2D.setColor(Color.BLACK);
-        graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH + 8, BOARD_HEIGHT + 8);
+        graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT + 2);
     }
 
     private void drawNextBlock(Graphics2D graphics2D) {
@@ -67,6 +66,13 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
     }
 
     private void update() {
+        // System.out.println("[" + gameState.blockCounter + "] update");
+
+        gameState.blockCounter += 1;
+        if (gameState.blockCounter == gameState.dropInterval) {
+            gameState.currentBlock.move(Direction.DOWN);
+            gameState.blockCounter = 0;
+        }
     }
 
     @Override
@@ -111,11 +117,11 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("key pressed: " + e.getKeyCode());
+        // System.out.println("key pressed: " + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            gameState.currentBlock.move(new Position(-1, 0));
+            gameState.currentBlock.move(Direction.LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            gameState.currentBlock.move(new Position(1, 0));
+            gameState.currentBlock.move(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             gameState.currentBlock.rotateCW();
         }

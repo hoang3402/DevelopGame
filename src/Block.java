@@ -45,10 +45,19 @@ public class Block {
         return result;
     }
 
-    public void move(Position position) {
+    public void move(Direction direction) {
+        int x = 0, y = 0;
+        switch (direction) {
+            case UP -> {
+            }
+            case DOWN -> y = 1;
+            case LEFT -> x = -1;
+            case RIGHT -> x = 1;
+        }
+
         this.currentOffset = new Position(
-                this.currentOffset.x + position.x * Main.TILE_SIZE,
-                this.currentOffset.y + position.y * Main.TILE_SIZE
+                this.currentOffset.x + x * Main.TILE_SIZE,
+                this.currentOffset.y + y * Main.TILE_SIZE
         );
     }
 
