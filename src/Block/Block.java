@@ -16,10 +16,7 @@ public class Block {
     int state = 0;
 
     public Block(Position position) {
-        startOffset = new Position(
-                position.x / Main.TILE_SIZE,
-                position.y / Main.TILE_SIZE
-        );
+        startOffset = position;
         currentOffset = position;
     }
 
@@ -28,7 +25,7 @@ public class Block {
         for (Position tile : tiles[state]) {
             graphics2D.fillRect(
                     (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
-                    (tile.y + currentOffset.y) * Main.TILE_SIZE - GameManager.TOP_Y,
+                    (tile.y + currentOffset.y) * Main.TILE_SIZE,
                     Main.TILE_SIZE, Main.TILE_SIZE
             );
         }

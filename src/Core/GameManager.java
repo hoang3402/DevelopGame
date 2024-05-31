@@ -57,7 +57,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
                 graphics2D.setColor(Color.BLACK);
                 graphics2D.fillRect(
                         i * Main.TILE_SIZE + LEFT_X,
-                        j * Main.TILE_SIZE - TOP_Y,
+                        j * Main.TILE_SIZE,
                         Main.TILE_SIZE, Main.TILE_SIZE
                 );
             }
@@ -85,6 +85,12 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 
     private void update() {
         // System.out.println("[" + gameState.blockCounter + "] update");
+
+        if (gameState.gameOver) {
+            System.out.println("Game Over");
+            System.exit(0);
+            return;
+        }
 
         gameState.blockCounter += 1;
         if (gameState.blockCounter != gameState.dropInterval) return;
