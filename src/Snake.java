@@ -19,11 +19,11 @@ public class Snake extends JPanel implements KeyListener {
     Game game;
 
     private void loadImage() throws IOException {
-        var _headDown = ImageIO.read(new File("src/assets/headDown.png"));
-        var _headLeft = ImageIO.read(new File("src/assets/headLeft.png"));
-        var _headRight = ImageIO.read(new File("src/assets/headRight.png"));
-        var _headUp = ImageIO.read(new File("src/assets/headUp.png"));
-        var _tail = ImageIO.read(new File("src/assets/tail.png"));
+        var _headDown = ImageIO.read(new File("src/assets/headDown.jpg"));
+        var _headLeft = ImageIO.read(new File("src/assets/headLeft.jpg"));
+        var _headRight = ImageIO.read(new File("src/assets/headRight.jpg"));
+        var _headUp = ImageIO.read(new File("src/assets/headUp.jpg"));
+        var _tail = ImageIO.read(new File("src/assets/body.jpg"));
 
         headDown = _headDown.getScaledInstance(Main.BLOCK_SIZE, Main.BLOCK_SIZE, Image.SCALE_SMOOTH);
         headLeft = _headLeft.getScaledInstance(Main.BLOCK_SIZE, Main.BLOCK_SIZE, Image.SCALE_SMOOTH);
