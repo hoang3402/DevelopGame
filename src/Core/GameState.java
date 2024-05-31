@@ -8,16 +8,18 @@ import java.awt.*;
 
 public class GameState {
 
-    private final GameGrid gameGrid;
-    // Block.Block drop every 60 frames
-    public int dropInterval = 60;
-    public int blockCounter = 0;
+    protected final GameGrid gameGrid;
 
+    // Block.Block drop every 60 frames
+    public int dropInterval = 15;
+    public int blockCounter = 0;
     BlockQueue blockQueue = new BlockQueue();
-    Block currentBlock = blockQueue.nextBlock();
+    Block currentBlock;
+    private boolean gameOver = false;
 
     public GameState() {
         gameGrid = new GameGrid(24, 12);
+        currentBlock = blockQueue.getNextBlockAndUpdate();
     }
 
     public void paint(Graphics2D g) {
@@ -43,6 +45,13 @@ public class GameState {
         }
 
         gameGrid.clearFullRows();
+
+        if (isGameOver()) {
+            gameOver = true;
+        } else {
+            currentBlock = blockQueue.getNextBlockAndUpdate();
+            currentBlock.reset();
+        }
     }
 
     public void rotateCW() {
@@ -69,5 +78,6 @@ public class GameState {
             case Direction.LEFT -> Direction.RIGHT;
             case Direction.RIGHT -> Direction.LEFT;
         });
+        if (direction == Direction.DOWN) placeBlock();
     }
 }

@@ -48,12 +48,26 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
     private void drawBoard(Graphics2D graphics2D) {
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT);
+
+        int[][] gameGrid = gameState.gameGrid.gameGrid;
+        for (int i = 0; i < gameGrid.length; i++) {
+            var tile = gameGrid[i];
+            for (int j = 0; j < tile.length; j++) {
+                if (tile[j] == 0) continue;
+                graphics2D.setColor(Color.BLACK);
+                graphics2D.fillRect(
+                        i * Main.TILE_SIZE + LEFT_X,
+                        j * Main.TILE_SIZE - TOP_Y,
+                        Main.TILE_SIZE, Main.TILE_SIZE
+                );
+            }
+        }
     }
 
     private void drawFrameNextBlock(Graphics2D graphics2D) {
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
-        graphics2D.drawString("Next", RIGHT_X + 165, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString("Next", RIGHT_X + 165, TOP_Y + 60);
         graphics2D.drawRect(RIGHT_X + 100, TOP_Y, 200, 200);
     }
 
@@ -77,9 +91,6 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 
         gameState.move(Direction.DOWN);
 
-        if (!gameState.blockFits()) {
-            gameState.move(Direction.UP);
-        }
         gameState.blockCounter = 0;
     }
 

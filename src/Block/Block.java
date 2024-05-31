@@ -69,7 +69,8 @@ public class Block {
     }
 
     public void reset() {
-        this.currentOffset = this.startOffset;
+        this.currentOffset.x = 6;
+        this.currentOffset.y = 0;
         this.state = 0;
     }
 }

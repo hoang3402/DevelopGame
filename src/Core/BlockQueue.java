@@ -7,21 +7,28 @@ import java.util.Random;
 public class BlockQueue {
 
     private final Random random = new Random();
-    private final Block[] blocks;
+    private Block nextBlock;
+    private final Block[] blocks = new Block[]{
+            new IBlock(),
+            new JBlock(),
+            new LBlock(),
+            new OBlock(),
+            new SBlock(),
+            new TBlock(),
+            new ZBlock()
+    };
 
     public BlockQueue() {
-        this.blocks = new Block[]{
-                new IBlock(),
-                new JBlock(),
-                new LBlock(),
-                new OBlock(),
-                new SBlock(),
-                new TBlock(),
-                new ZBlock()
-        };
+        nextBlock = randomBlock();
     }
 
-    public Block nextBlock() {
+    private Block randomBlock() {
         return blocks[random.nextInt(blocks.length)];
+    }
+
+    public Block getNextBlockAndUpdate() {
+        Block result = nextBlock;
+        nextBlock = randomBlock();
+        return result;
     }
 }

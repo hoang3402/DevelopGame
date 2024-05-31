@@ -44,7 +44,7 @@ public class GameGrid {
 
     public void moveDown(int y, int numRows) {
         for (int x = 0; x < columns; x++) {
-            gameGrid[x + numRows][y] = gameGrid[x][y];
+            gameGrid[x][y + numRows] = gameGrid[x][y];
             gameGrid[x][y] = 0;
         }
     }
