@@ -49,6 +49,7 @@ public class Block {
         int x = 0, y = 0;
         switch (direction) {
             case UP -> {
+                return;
             }
             case DOWN -> y = 1;
             case LEFT -> x = -1;
@@ -65,4 +66,6 @@ public class Block {
         this.currentOffset = this.startOffset;
         this.state = 0;
     }
+
+    
 }
