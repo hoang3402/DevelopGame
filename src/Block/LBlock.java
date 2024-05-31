@@ -4,7 +4,7 @@ import Helper.Position;
 
 public class LBlock extends Block {
     public LBlock() {
-        super(new Position(0, 3));
+        super(new Position(5, 0));
 
         this.tiles = new Position[][]{
                 new Position[]{new Position(0, 2), new Position(1, 0), new Position(1, 1), new Position(1, 2)},
