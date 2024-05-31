@@ -21,8 +21,8 @@ public class Block {
         graphics2D.setColor(Color.BLACK);
         for (Position tile : tiles[state]) {
             graphics2D.fillRect(
-                    (tile.x + currentOffset.x) * Main.TILE_SIZE + GameBoard.LEFT_X,
-                    (tile.y + currentOffset.y) * Main.TILE_SIZE - GameBoard.TOP_Y,
+                    (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
+                    (tile.y + currentOffset.y) * Main.TILE_SIZE - GameManager.TOP_Y,
                     Main.TILE_SIZE, Main.TILE_SIZE
             );
         }

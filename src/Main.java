@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Tetris");
 
-        GameBoard gameBoard = new GameBoard();
+        GameManager gameBoard = new GameManager();
         frame.add(gameBoard);
         frame.pack();
 

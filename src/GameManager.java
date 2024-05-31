@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
-public class GameBoard extends JPanel implements Runnable, KeyListener {
+public class GameManager extends JPanel implements Runnable, KeyListener {
 
     private final static int BOARD_WIDTH = 360;
     private final static int BOARD_HEIGHT = 600;
@@ -22,7 +22,7 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
     private Thread gameThread;
 
-    public GameBoard() {
+    public GameManager() {
 
         LEFT_X = (Main.WIDTH - BOARD_WIDTH) / 2;
         RIGHT_X = LEFT_X + BOARD_WIDTH;
