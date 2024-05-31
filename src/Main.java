@@ -6,10 +6,11 @@ public class Main {
     final static int HEIGHT = 720;
     final static int TILE_SIZE = 30;
     final static int FPS = 60;
+    final static String title = "Tetris";
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tetris");
+        JFrame frame = new JFrame(title);
 
         GameManager gameBoard = new GameManager();
         frame.add(gameBoard);

@@ -46,14 +46,14 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT);
     }
 
-    private void drawNextBlock(Graphics2D graphics2D) {
+    private void drawFrameNextBlock(Graphics2D graphics2D) {
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
         graphics2D.drawString("Next", RIGHT_X + 165, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawRect(RIGHT_X + 100, TOP_Y, 200, 200);
     }
 
-    private void drawHoldBlock(Graphics2D graphics2D) {
+    private void drawFrameHoldBlock(Graphics2D graphics2D) {
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
         graphics2D.drawString("Hold", LEFT_X - 230, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
@@ -87,8 +87,8 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
 
         drawBoard(graphics2D);
-        drawNextBlock(graphics2D);
-        drawHoldBlock(graphics2D);
+        drawFrameNextBlock(graphics2D);
+        drawFrameHoldBlock(graphics2D);
 
         gameState.paint(graphics2D);
     }
@@ -123,11 +123,11 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         // System.out.println("key pressed: " + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            gameState.currentBlock.move(Direction.LEFT);
+            gameState.move(Direction.LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            gameState.currentBlock.move(Direction.RIGHT);
+            gameState.move(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            gameState.currentBlock.rotateCW();
+            gameState.rotateCW();
         }
     }
 

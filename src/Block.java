@@ -49,7 +49,7 @@ public class Block {
         return result;
     }
 
-    public void move(Direction direction) {
+    protected void move(Direction direction) {
         int x = 0, y = 0;
         switch (direction) {
             case UP -> y = -1;
@@ -58,11 +58,8 @@ public class Block {
             case RIGHT -> x = 1;
         }
 
-
-        this.currentOffset = new Position(
-                this.currentOffset.x + x,
-                this.currentOffset.y + y
-        );
+        this.currentOffset.x += x;
+        this.currentOffset.y += y;
     }
 
     public void reset() {

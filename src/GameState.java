@@ -38,4 +38,30 @@ public class GameState {
 
         gameGrid.clearFullRows();
     }
+
+    public void rotateCW() {
+        currentBlock.rotateCW();
+        if (blockFits()) return;
+
+        currentBlock.rotateCCW();
+    }
+
+    public void rotateCCW() {
+        currentBlock.rotateCCW();
+        if (blockFits()) return;
+
+        currentBlock.rotateCW();
+    }
+
+    public void move(Direction direction) {
+        currentBlock.move(direction);
+        if (blockFits()) return;
+
+        currentBlock.move(switch (direction) {
+            case UP -> Direction.DOWN;
+            case DOWN -> Direction.UP;
+            case LEFT -> Direction.RIGHT;
+            case RIGHT -> Direction.LEFT;
+        });
+    }
 }
