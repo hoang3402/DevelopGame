@@ -1,3 +1,7 @@
+package Block;
+
+import Helper.Position;
+
 public class IBlock extends Block {
 
     public IBlock() {

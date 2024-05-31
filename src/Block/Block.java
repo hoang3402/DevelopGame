@@ -1,6 +1,12 @@
+package Block;
+
+import Core.GameManager;
+import Core.Main;
+import Helper.Direction;
+import Helper.Position;
+
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Block {
 
@@ -38,8 +44,8 @@ public class Block {
         this.state = (this.state - 1 + this.tiles.length) % this.tiles.length;
     }
 
-    public List<Position> getPositions() {
-        List<Position> result = new ArrayList<>();
+    public java.util.List<Position> getPositions() {
+        java.util.List<Position> result = new ArrayList<>();
         for (Position tile : this.tiles[state]) {
             result.add(new Position(
                     tile.x + currentOffset.x,
@@ -49,13 +55,13 @@ public class Block {
         return result;
     }
 
-    protected void move(Direction direction) {
+    public void move(Direction direction) {
         int x = 0, y = 0;
         switch (direction) {
-            case UP -> y = -1;
-            case DOWN -> y = 1;
-            case LEFT -> x = -1;
-            case RIGHT -> x = 1;
+            case Direction.UP -> y = -1;
+            case Direction.DOWN -> y = 1;
+            case Direction.LEFT -> x = -1;
+            case Direction.RIGHT -> x = 1;
         }
 
         this.currentOffset.x += x;

@@ -1,3 +1,7 @@
+package Block;
+
+import Helper.Position;
+
 public class ZBlock extends Block {
     public ZBlock() {
         super(new Position(0, 3));

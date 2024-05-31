@@ -1,3 +1,7 @@
+package Core;
+
+import Block.*;
+
 import java.util.Random;
 
 public class BlockQueue {

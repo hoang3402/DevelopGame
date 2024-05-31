@@ -1,3 +1,7 @@
+package Block;
+
+import Helper.Position;
+
 public class LBlock extends Block {
     public LBlock() {
         super(new Position(0, 3));

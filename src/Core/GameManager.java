@@ -1,3 +1,7 @@
+package Core;
+
+import Helper.Direction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -71,10 +75,10 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         gameState.blockCounter += 1;
         if (gameState.blockCounter != gameState.dropInterval) return;
 
-        gameState.currentBlock.move(Direction.DOWN);
+        gameState.move(Direction.DOWN);
 
         if (!gameState.blockFits()) {
-            gameState.currentBlock.move(Direction.UP);
+            gameState.move(Direction.UP);
         }
         gameState.blockCounter = 0;
     }

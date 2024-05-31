@@ -1,3 +1,5 @@
+package Helper;
+
 public class Position {
 
     public int x;

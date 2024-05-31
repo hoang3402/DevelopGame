@@ -1,9 +1,15 @@
+package Core;
+
+import Block.Block;
+import Helper.Direction;
+import Helper.Position;
+
 import java.awt.*;
 
 public class GameState {
 
     private final GameGrid gameGrid;
-    // Block drop every 60 frames
+    // Block.Block drop every 60 frames
     public int dropInterval = 60;
     public int blockCounter = 0;
 
@@ -58,10 +64,10 @@ public class GameState {
         if (blockFits()) return;
 
         currentBlock.move(switch (direction) {
-            case UP -> Direction.DOWN;
-            case DOWN -> Direction.UP;
-            case LEFT -> Direction.RIGHT;
-            case RIGHT -> Direction.LEFT;
+            case Direction.UP -> Direction.DOWN;
+            case Direction.DOWN -> Direction.UP;
+            case Direction.LEFT -> Direction.RIGHT;
+            case Direction.RIGHT -> Direction.LEFT;
         });
     }
 }

@@ -1,3 +1,7 @@
+package Block;
+
+import Helper.Position;
+
 public class JBlock extends Block {
     public JBlock() {
         super(new Position(0, 3));

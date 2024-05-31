@@ -1,10 +1,12 @@
+package Core;
+
 import javax.swing.*;
 
 public class Main {
 
     final static int WIDTH = 1280;
     final static int HEIGHT = 720;
-    final static int TILE_SIZE = 30;
+    public final static int TILE_SIZE = 30;
     final static int FPS = 60;
     final static String title = "Tetris";
 

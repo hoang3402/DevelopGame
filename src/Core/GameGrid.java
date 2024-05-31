@@ -1,3 +1,7 @@
+package Core;
+
+import Helper.Position;
+
 public class GameGrid {
 
     private final int rows;
