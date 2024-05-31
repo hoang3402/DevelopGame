@@ -10,7 +10,10 @@ public class Block {
     int state = 0;
 
     public Block(Position position) {
-        startOffset = position;
+        startOffset = new Position(
+                position.x / Main.TILE_SIZE,
+                position.y / Main.TILE_SIZE
+        );
         currentOffset = position;
     }
 
@@ -18,8 +21,8 @@ public class Block {
         graphics2D.setColor(Color.BLACK);
         for (Position tile : tiles[state]) {
             graphics2D.fillRect(
-                    tile.x * Main.TILE_SIZE + currentOffset.x,
-                    tile.y * Main.TILE_SIZE + currentOffset.y,
+                    (tile.x + currentOffset.x) * Main.TILE_SIZE + GameBoard.LEFT_X,
+                    (tile.y + currentOffset.y) * Main.TILE_SIZE - GameBoard.TOP_Y,
                     Main.TILE_SIZE, Main.TILE_SIZE
             );
         }
@@ -31,6 +34,7 @@ public class Block {
     }
 
     public void rotateCCW() {
+        System.out.println("Rotate cww");
         this.state = (this.state - 1 + this.tiles.length) % this.tiles.length;
     }
 
@@ -38,8 +42,8 @@ public class Block {
         List<Position> result = new ArrayList<>();
         for (Position tile : this.tiles[state]) {
             result.add(new Position(
-                    tile.x * Main.TILE_SIZE + currentOffset.x,
-                    tile.y * Main.TILE_SIZE + currentOffset.y
+                    tile.x + currentOffset.x,
+                    tile.y + currentOffset.y
             ));
         }
         return result;
@@ -48,17 +52,16 @@ public class Block {
     public void move(Direction direction) {
         int x = 0, y = 0;
         switch (direction) {
-            case UP -> {
-                return;
-            }
+            case UP -> y = -1;
             case DOWN -> y = 1;
             case LEFT -> x = -1;
             case RIGHT -> x = 1;
         }
 
+
         this.currentOffset = new Position(
-                this.currentOffset.x + x * Main.TILE_SIZE,
-                this.currentOffset.y + y * Main.TILE_SIZE
+                this.currentOffset.x + x,
+                this.currentOffset.y + y
         );
     }
 
@@ -66,6 +69,4 @@ public class Block {
         this.currentOffset = this.startOffset;
         this.state = 0;
     }
-
-    
 }

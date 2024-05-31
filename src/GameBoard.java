@@ -18,9 +18,9 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
     public static int BLOCK_START_X;
     public static int BLOCK_START_Y;
+    private final GameState gameState;
 
     private Thread gameThread;
-    private final GameState gameState;
 
     public GameBoard() {
 
@@ -43,7 +43,7 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
 
     private void drawBoard(Graphics2D graphics2D) {
         graphics2D.setColor(Color.BLACK);
-        graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT + 2);
+        graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT);
     }
 
     private void drawNextBlock(Graphics2D graphics2D) {
@@ -69,10 +69,14 @@ public class GameBoard extends JPanel implements Runnable, KeyListener {
         // System.out.println("[" + gameState.blockCounter + "] update");
 
         gameState.blockCounter += 1;
-        if (gameState.blockCounter == gameState.dropInterval) {
-            gameState.currentBlock.move(Direction.DOWN);
-            gameState.blockCounter = 0;
+        if (gameState.blockCounter != gameState.dropInterval) return;
+
+        gameState.currentBlock.move(Direction.DOWN);
+
+        if (!gameState.blockFits()) {
+            gameState.currentBlock.move(Direction.UP);
         }
+        gameState.blockCounter = 0;
     }
 
     @Override

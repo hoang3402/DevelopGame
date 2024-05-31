@@ -1,6 +1,6 @@
 public class LBlock extends Block {
     public LBlock() {
-        super(new Position(GameBoard.BLOCK_START_X, 3 + GameBoard.BLOCK_START_Y));
+        super(new Position(0, 3));
 
         this.tiles = new Position[][]{
                 new Position[]{new Position(0, 2), new Position(1, 0), new Position(1, 1), new Position(1, 2)},
