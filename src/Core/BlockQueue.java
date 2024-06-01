@@ -2,13 +2,14 @@ package Core;
 
 import Block.*;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class BlockQueue {
 
     private final Random random = new Random();
     private Block nextBlock;
-    private final Block[] blocks = new Block[]{
+    protected final Block[] blocks = new Block[]{
             new IBlock(),
             new JBlock(),
             new LBlock(),
@@ -18,7 +19,7 @@ public class BlockQueue {
             new ZBlock()
     };
 
-    public BlockQueue() {
+    public BlockQueue() throws IOException {
         nextBlock = randomBlock();
     }
 

@@ -1,6 +1,7 @@
 package Core;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class Main {
 
@@ -14,7 +15,13 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame(title);
 
-        GameManager gameBoard = new GameManager();
+        GameManager gameBoard;
+        try {
+            gameBoard = new GameManager();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         frame.add(gameBoard);
         frame.pack();
 

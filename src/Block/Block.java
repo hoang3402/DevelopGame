@@ -15,6 +15,7 @@ public class Block {
     Position startOffset;
     Position currentOffset;
     int state = 0;
+    public Image image;
 
     public Block(Position position) {
         startOffset = position;
@@ -23,12 +24,23 @@ public class Block {
 
     public void paint(Graphics2D graphics2D) {
         graphics2D.setColor(Color.BLACK);
+
+
         for (Position tile : tiles[state]) {
-            graphics2D.fillRect(
-                    (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
-                    (tile.y + currentOffset.y) * Main.TILE_SIZE,
-                    Main.TILE_SIZE, Main.TILE_SIZE
-            );
+
+            if (image != null) {
+                graphics2D.drawImage(image,
+                        (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
+                        (tile.y + currentOffset.y) * Main.TILE_SIZE,
+                        null);
+            } else {
+                System.out.println("something is wrong");
+                graphics2D.fillRect(
+                        (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
+                        (tile.y + currentOffset.y) * Main.TILE_SIZE,
+                        Main.TILE_SIZE, Main.TILE_SIZE
+                );
+            }
         }
     }
 

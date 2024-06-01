@@ -5,19 +5,22 @@ import Helper.Direction;
 import Helper.Position;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class GameState {
 
     protected final GameGrid gameGrid;
     // Block drop every [dropInterval] frames
-    public int dropInterval = 15;
+    public int dropInterval = 60;
+    private int limitDropInterval = 5;
+    private int counter = 0;
     public int blockCounter = 0;
     protected boolean gameOver = false;
     protected int score = 0;
     BlockQueue blockQueue = new BlockQueue();
     Block currentBlock, nextBlock, holdBlock;
 
-    public GameState() {
+    public GameState() throws IOException {
         gameGrid = new GameGrid(22, 12);
         updateBlock();
     }
@@ -41,16 +44,26 @@ public class GameState {
 
     public void placeBlock() {
         for (Position position : currentBlock.getPositions()) {
-            gameGrid.gameGrid[position.x][position.y] = 1;
+            gameGrid.gameGrid[position.x][position.y] = currentBlock.id;
         }
 
-        score += gameGrid.clearFullRows();
+        addScore(gameGrid.clearFullRows());
 
         if (isGameOver()) {
             gameOver = true;
         } else {
             updateBlock();
             currentBlock.reset();
+        }
+    }
+
+    private void addScore(int score) {
+        this.score += score;
+        this.counter += score;
+
+        if (dropInterval > limitDropInterval && counter >= 10) {
+            dropInterval--;
+            counter = 0;
         }
     }
 
