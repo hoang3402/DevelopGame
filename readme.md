@@ -48,6 +48,16 @@ Với thuật toán này sẽ đảm bảo FPS đã được khai báo
 
 ---
 
+### Tính năng đoán khối tiếp theo
+
+Khi game bắt đầu sẽ hiển thị khối sẽ được xuất hiện tiếp theo sau khi khối hiện tại được đặt xuống
+
+<div style="text-align:center">
+  <img src="img/next block.png"  alt="next block"/>
+</div>
+
+---
+
 ### Tính năng giữ khối
 
 Khi muốn giữ khối cần bấm [Space],
