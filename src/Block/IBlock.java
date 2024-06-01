@@ -7,6 +7,7 @@ public class IBlock extends Block {
     public IBlock() {
         super(new Position(5, 0));
 
+        this.id = 1;
         this.tiles = new Position[][]{
                 new Position[]{new Position(1, 0), new Position(1, 1), new Position(1, 2), new Position(1, 3)},
                 new Position[]{new Position(0, 2), new Position(1, 2), new Position(2, 2), new Position(3, 2)},

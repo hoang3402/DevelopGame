@@ -12,8 +12,9 @@ public class Block {
 
     Position startOffset;
     Position currentOffset;
-    Position[][] tiles;
+    public Position[][] tiles;
     int state = 0;
+    public int id;
 
     public Block(Position position) {
         startOffset = position;

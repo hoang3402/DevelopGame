@@ -26,6 +26,10 @@ public class BlockQueue {
         return blocks[random.nextInt(blocks.length)];
     }
 
+    public Block getNextBlock() {
+        return nextBlock;
+    }
+
     public Block getNextBlockAndUpdate() {
         Block result = nextBlock;
         nextBlock = randomBlock();

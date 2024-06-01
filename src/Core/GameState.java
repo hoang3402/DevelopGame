@@ -14,12 +14,12 @@ public class GameState {
     public int dropInterval = 15;
     public int blockCounter = 0;
     BlockQueue blockQueue = new BlockQueue();
-    Block currentBlock;
+    Block currentBlock, nextBlock;
     protected boolean gameOver = false;
 
     public GameState() {
         gameGrid = new GameGrid(22, 12);
-        currentBlock = blockQueue.getNextBlockAndUpdate();
+        updateBlock();
     }
 
     public void paint(Graphics2D g) {
@@ -49,7 +49,7 @@ public class GameState {
         if (isGameOver()) {
             gameOver = true;
         } else {
-            currentBlock = blockQueue.getNextBlockAndUpdate();
+            updateBlock();
             currentBlock.reset();
         }
     }
@@ -79,5 +79,10 @@ public class GameState {
             case Direction.RIGHT -> Direction.LEFT;
         });
         if (direction == Direction.DOWN) placeBlock();
+    }
+
+    private void updateBlock() {
+        currentBlock = blockQueue.getNextBlockAndUpdate();
+        nextBlock = blockQueue.getNextBlock();
     }
 }
