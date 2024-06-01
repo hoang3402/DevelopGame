@@ -77,4 +77,14 @@ Khi đã giữ khối
 
 ---
 
-###  
+### Áp dụng các hình ảnh đã thiết kế
+
+<div style="text-align:center">
+  <img src="img/block color.png"  alt="block color"/>
+</div>
+
+Kết quả
+
+<div style="text-align:center">
+  <img src="img/result.png"  alt="result"/>
+</div>
