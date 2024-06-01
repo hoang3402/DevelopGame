@@ -2,7 +2,9 @@
 
 ## Sơ đồ mô hình quản lý các khối
 
-![img.png](img/tetris_block.png)
+<div style="text-align:center">
+  <img src="img/tetris_block.png"  alt="block class"/>
+</div>
 
 Mô hình quản lý các khối trong game Tetris có thể được chia thành các thành phần chính sau:
 
@@ -14,8 +16,24 @@ Mô hình quản lý các khối trong game Tetris có thể được chia thàn
 - currentOffset: biểu diễn vị trí hiện tại của khối
 - state: biểu diễn trạng thái xoay của khối
 
-các phương thức khác nhằm giúp ích cho việc quản lý vị trí của khối như xoay, đặt lại vị trí, di
-chuyển sang trái phải lên xuống
+các phương thức khác nhằm giúp ích cho việc quản lý vị trí của khối như xoay,
+đặt lại vị trí, di chuyển sang trái phải lên xuống
 
 ---
 
+### Tính năng giữ khối
+
+Khi muốn giữ khối cần bấm [Space],
+khối đó sẽ được lưu lại và hiển thị bên tay trái màn hình
+
+Khi mới khởi tạo và chưa giữ khối nào
+
+<div style="text-align:center">
+  <img src="img/hold block when init.png"  alt="hold block when init"/>
+</div>
+
+Khi đã giữ khối
+
+<div style="text-align:center">
+  <img src="img/hold block when active.png"  alt="hold block when active"/>
+</div>
