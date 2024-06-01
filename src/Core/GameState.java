@@ -15,7 +15,7 @@ public class GameState {
     protected boolean gameOver = false;
     protected int score = 0;
     BlockQueue blockQueue = new BlockQueue();
-    Block currentBlock, nextBlock;
+    Block currentBlock, nextBlock, holdBlock;
 
     public GameState() {
         gameGrid = new GameGrid(22, 12);
@@ -81,12 +81,21 @@ public class GameState {
         if (direction == Direction.DOWN) placeBlock();
     }
 
-    public void moveDownInstead() {
-
-    }
-
     private void updateBlock() {
         currentBlock = blockQueue.getNextBlockAndUpdate();
         nextBlock = blockQueue.getNextBlock();
+    }
+
+    public void setHoldBlock() {
+        if (holdBlock == null) {
+            holdBlock = currentBlock;
+            updateBlock();
+        } else {
+            Block temp = holdBlock;
+            holdBlock = currentBlock;
+            currentBlock = temp;
+        }
+
+        currentBlock.reset();
     }
 }

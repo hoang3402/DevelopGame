@@ -72,7 +72,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         for (var position : nextBlock.tiles[0]) {
             graphics2D.fillRect(
                     position.x * Main.TILE_SIZE + RIGHT_X + 160,
-                    position.y * Main.TILE_SIZE + TOP_Y + 70,
+                    position.y * Main.TILE_SIZE + TOP_Y + 75,
                     Main.TILE_SIZE, Main.TILE_SIZE
             );
         }
@@ -83,6 +83,17 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         graphics2D.drawString("Hold", LEFT_X - 230, TOP_Y + 60);
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawRect(LEFT_X - 300, TOP_Y, 200, 200);
+
+        Block holdBlock = gameState.holdBlock;
+        if (holdBlock == null) return;
+        graphics2D.setColor(Color.BLACK);
+        for (var position : holdBlock.tiles[0]) {
+            graphics2D.fillRect(
+                    position.x * Main.TILE_SIZE + LEFT_X - 225,
+                    position.y * Main.TILE_SIZE + TOP_Y + 75,
+                    Main.TILE_SIZE, Main.TILE_SIZE
+            );
+        }
     }
 
     public void start() {
@@ -162,6 +173,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
             case KeyEvent.VK_RIGHT -> gameState.move(Direction.RIGHT);
             case KeyEvent.VK_UP -> gameState.rotateCW();
             case KeyEvent.VK_DOWN -> gameState.move(Direction.DOWN);
+            case KeyEvent.VK_SPACE -> gameState.setHoldBlock();
         }
     }
 

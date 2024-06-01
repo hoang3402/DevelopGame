@@ -33,12 +33,12 @@ public class Block {
     }
 
     public void rotateCW() {
-        System.out.println("Rotate cw");
+        // System.out.println("Rotate cw");
         this.state = (this.state + 1) % this.tiles.length;
     }
 
     public void rotateCCW() {
-        System.out.println("Rotate cww");
+        // System.out.println("Rotate cww");
         this.state = (this.state - 1 + this.tiles.length) % this.tiles.length;
     }
 
