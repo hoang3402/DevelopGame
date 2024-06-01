@@ -20,8 +20,6 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
     public static int TOP_Y;
     public static int BOTTOM_Y;
 
-    public static int BLOCK_START_X;
-    public static int BLOCK_START_Y;
     private final GameState gameState;
 
     private Thread gameThread;
@@ -32,9 +30,6 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         RIGHT_X = LEFT_X + BOARD_WIDTH;
         TOP_Y = 60;
         BOTTOM_Y = TOP_Y + BOARD_HEIGHT;
-
-        BLOCK_START_X = LEFT_X + BOARD_WIDTH / 2 - Main.TILE_SIZE;
-        BLOCK_START_Y = TOP_Y;
 
         gameState = new GameState();
 
