@@ -195,7 +195,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
             case KeyEvent.VK_LEFT -> gameState.move(Direction.LEFT);
             case KeyEvent.VK_RIGHT -> gameState.move(Direction.RIGHT);
             case KeyEvent.VK_UP -> gameState.rotateCW();
-            case KeyEvent.VK_DOWN -> gameState.move(Direction.DOWN);
+            case KeyEvent.VK_DOWN -> gameState.moveDownInstantly();
             case KeyEvent.VK_SPACE -> gameState.setHoldBlock();
         }
     }

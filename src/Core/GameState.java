@@ -94,6 +94,14 @@ public class GameState {
         if (direction == Direction.DOWN) placeBlock();
     }
 
+    public void moveDownInstantly() {
+        do {
+            currentBlock.move(Direction.DOWN);
+        } while (blockFits());
+        currentBlock.move(Direction.UP);
+        placeBlock();
+    }
+
     private void updateBlock() {
         currentBlock = blockQueue.getNextBlockAndUpdate();
         nextBlock = blockQueue.getNextBlock();
