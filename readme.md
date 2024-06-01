@@ -21,6 +21,33 @@ các phương thức khác nhằm giúp ích cho việc quản lý vị 
 
 ---
 
+## Game loop
+
+```java
+public void run() {
+    double drawInterval = (double) 1_000_000_000 / Main.FPS;
+    double delta = 0;
+    long lastTime = System.nanoTime();
+    long currentTime;
+
+    while (gameThread != null) {
+        currentTime = System.nanoTime();
+        delta += (currentTime - lastTime) / drawInterval;
+        lastTime = currentTime;
+
+        if (delta >= 1) {
+            update();
+            repaint();
+            delta--;
+        }
+    }
+}
+```
+
+Với thuật toán này sẽ đảm bảo FPS đã được khai báo
+
+---
+
 ### Tính năng giữ khối
 
 Khi muốn giữ khối cần bấm [Space],
