@@ -1,5 +1,17 @@
 # Tetris
 
+## Vai trò của các lớp
+
+- GameManager sẽ quản lý toàn bộ các thành phần trong game như game loop
+- GameState sẽ quản lý các trạng thái của game như số điểm, tốc độ rơi của khối, lưu trữ khối hiện tại, đang giữ và tiếp
+  theo
+- BlockQueue sẽ giúp đỡ trong việc quản lý danh sách khối, sẽ phụ trách cả việc lựa trọn khối tiếp theo
+- GameGrid sẽ quản lý vị trí của các khối dựa vào ma trận 2 chiều
+- Các lớp trong package Helper sẽ giúp viết code đơn giản và dễ hiểu hơn
+- Các lớp trong package Block sẽ định nghĩa các khối sẽ được biểu diễn như thế nào
+
+---
+
 ## Sơ đồ mô hình quản lý các khối
 
 <div style="text-align:center">
