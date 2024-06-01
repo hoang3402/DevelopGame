@@ -83,6 +83,39 @@ Khi đã giữ khối
   <img src="img/block color.png"  alt="block color"/>
 </div>
 
+Việc load hình ảnh sẽ được thực thi khi dạng Block đó được tạo
+
+```java
+public KhoiMongMuon() {
+    var _image = image = ImageIO.read(new File("src/assets/[màu mong muốn].jpg"));
+    this.image = _image.getScaledInstance(Main.TILE_SIZE, Main.TILE_SIZE, Image.SCALE_SMOOTH);
+}
+```
+
+Sau đó cần vẽ hình ảnh đúng với vị trí đã đặt của block
+
+```java
+private void drawBoard(Graphics2D graphics2D) {
+    graphics2D.setColor(Color.BLACK);
+    graphics2D.drawRect(LEFT_X, TOP_Y, BOARD_WIDTH, BOARD_HEIGHT);
+
+    var gameGrid = gameState.gameGrid.gameGrid;
+    for (int i = 0; i < gameGrid.length; i++) {
+        var tile = gameGrid[i];
+        for (int j = 0; j < tile.length; j++) {
+            if (tile[j] == 0) continue;
+            // tile[j] là id block
+            graphics2D.setColor(Color.BLACK);
+            Block block = gameState.blockQueue.blocks[tile[j] - 1];
+            graphics2D.drawImage(block.image,
+                    i * Main.TILE_SIZE + LEFT_X,
+                    j * Main.TILE_SIZE,
+                    null);
+        }
+    }
+}
+```
+
 Kết quả
 
 <div style="text-align:center">
