@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class Block {
 
+    public Position[][] tiles;
+    public int id;
     Position startOffset;
     Position currentOffset;
-    public Position[][] tiles;
     int state = 0;
-    public int id;
 
     public Block(Position position) {
         startOffset = position;

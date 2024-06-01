@@ -1,5 +1,6 @@
 package Core;
 
+import Block.Block;
 import Helper.Direction;
 
 import javax.swing.*;
@@ -64,6 +65,17 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawString("Next", RIGHT_X + 165, TOP_Y + 60);
         graphics2D.drawRect(RIGHT_X + 100, TOP_Y, 200, 200);
+
+        Block nextBlock = gameState.nextBlock;
+
+        graphics2D.setColor(Color.BLACK);
+        for (var position : nextBlock.tiles[0]) {
+            graphics2D.fillRect(
+                    position.x * Main.TILE_SIZE + RIGHT_X + 160,
+                    position.y * Main.TILE_SIZE + TOP_Y + 70,
+                    Main.TILE_SIZE, Main.TILE_SIZE
+            );
+        }
     }
 
     private void drawFrameHoldBlock(Graphics2D graphics2D) {
