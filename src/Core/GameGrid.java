@@ -49,7 +49,7 @@ public class GameGrid {
         }
     }
 
-    public void clearFullRows() {
+    public int clearFullRows() {
         int clearCount = 0;
 
         for (int y = rows - 1; y >= 0; y--) {
@@ -60,5 +60,7 @@ public class GameGrid {
                 moveDown(y, clearCount);
             }
         }
+
+        return clearCount;
     }
 }

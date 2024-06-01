@@ -114,11 +114,18 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
 
+        drawScore(graphics2D);
         drawBoard(graphics2D);
         drawFrameNextBlock(graphics2D);
         drawFrameHoldBlock(graphics2D);
 
         gameState.paint(graphics2D);
+    }
+
+    private void drawScore(Graphics2D graphics2D) {
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 30));
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString("Score: " + gameState.score, LEFT_X, TOP_Y - 10);
     }
 
     @Override
@@ -150,12 +157,11 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // System.out.println("key pressed: " + e.getKeyCode());
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            gameState.move(Direction.LEFT);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            gameState.move(Direction.RIGHT);
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            gameState.rotateCW();
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> gameState.move(Direction.LEFT);
+            case KeyEvent.VK_RIGHT -> gameState.move(Direction.RIGHT);
+            case KeyEvent.VK_UP -> gameState.rotateCW();
+            case KeyEvent.VK_DOWN -> gameState.move(Direction.DOWN);
         }
     }
 

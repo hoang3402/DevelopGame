@@ -9,13 +9,13 @@ import java.awt.*;
 public class GameState {
 
     protected final GameGrid gameGrid;
-
     // Block drop every [dropInterval] frames
     public int dropInterval = 15;
     public int blockCounter = 0;
+    protected boolean gameOver = false;
+    protected int score = 0;
     BlockQueue blockQueue = new BlockQueue();
     Block currentBlock, nextBlock;
-    protected boolean gameOver = false;
 
     public GameState() {
         gameGrid = new GameGrid(22, 12);
@@ -44,7 +44,7 @@ public class GameState {
             gameGrid.gameGrid[position.x][position.y] = 1;
         }
 
-        gameGrid.clearFullRows();
+        score += gameGrid.clearFullRows();
 
         if (isGameOver()) {
             gameOver = true;
@@ -79,6 +79,10 @@ public class GameState {
             case Direction.RIGHT -> Direction.LEFT;
         });
         if (direction == Direction.DOWN) placeBlock();
+    }
+
+    public void moveDownInstead() {
+
     }
 
     private void updateBlock() {
