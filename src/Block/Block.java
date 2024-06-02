@@ -1,12 +1,13 @@
 package Block;
 
 import Core.GameManager;
-import Core.Main;
 import Helper.Direction;
 import Helper.Position;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import static Core.Setting.TILE_SIZE;
 
 public class Block {
 
@@ -30,15 +31,15 @@ public class Block {
 
             if (image != null) {
                 graphics2D.drawImage(image,
-                        (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
-                        (tile.y + currentOffset.y) * Main.TILE_SIZE,
+                        (tile.x + currentOffset.x) * TILE_SIZE + GameManager.LEFT_X,
+                        (tile.y + currentOffset.y) * TILE_SIZE,
                         null);
             } else {
                 System.out.println("something is wrong");
                 graphics2D.fillRect(
-                        (tile.x + currentOffset.x) * Main.TILE_SIZE + GameManager.LEFT_X,
-                        (tile.y + currentOffset.y) * Main.TILE_SIZE,
-                        Main.TILE_SIZE, Main.TILE_SIZE
+                        (tile.x + currentOffset.x) * TILE_SIZE + GameManager.LEFT_X,
+                        (tile.y + currentOffset.y) * TILE_SIZE,
+                        TILE_SIZE, TILE_SIZE
                 );
             }
         }

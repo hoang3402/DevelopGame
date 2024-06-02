@@ -10,13 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import static Core.Setting.*;
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 
 public class GameManager extends JPanel implements Runnable, KeyListener {
 
-    private final static int BOARD_WIDTH = 360;
-    private final static int BOARD_HEIGHT = 600;
 
     public static int LEFT_X;
     public static int RIGHT_X;
@@ -29,7 +28,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
 
     public GameManager() throws IOException {
 
-        LEFT_X = (Main.WIDTH - BOARD_WIDTH) / 2;
+        LEFT_X = (Setting.WIDTH - BOARD_WIDTH) / 2;
         RIGHT_X = LEFT_X + BOARD_WIDTH;
         TOP_Y = 60;
         BOTTOM_Y = TOP_Y + BOARD_HEIGHT;
@@ -39,7 +38,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+        setPreferredSize(new Dimension(Setting.WIDTH, Setting.HEIGHT));
         setLayout(null);
     }
 
@@ -55,8 +54,8 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
                 graphics2D.setColor(Color.BLACK);
                 Block block = gameState.blockQueue.blocks[tile[j] - 1];
                 graphics2D.drawImage(block.image,
-                        i * Main.TILE_SIZE + LEFT_X,
-                        j * Main.TILE_SIZE,
+                        i * TILE_SIZE + LEFT_X,
+                        j * TILE_SIZE,
                         null);
             }
         }
@@ -74,16 +73,16 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
             if (gameState.nextBlock.image != null) {
                 graphics2D.drawImage(
                         gameState.nextBlock.image,
-                        position.x * Main.TILE_SIZE + RIGHT_X + 160,
-                        position.y * Main.TILE_SIZE + TOP_Y + 75,
+                        position.x * TILE_SIZE + RIGHT_X + 160,
+                        position.y * TILE_SIZE + TOP_Y + 75,
                         null
                 );
             } else {
                 System.out.println("Something is wrong");
                 graphics2D.fillRect(
-                        position.x * Main.TILE_SIZE + RIGHT_X + 160,
-                        position.y * Main.TILE_SIZE + TOP_Y + 75,
-                        Main.TILE_SIZE, Main.TILE_SIZE
+                        position.x * TILE_SIZE + RIGHT_X + 160,
+                        position.y * TILE_SIZE + TOP_Y + 75,
+                        TILE_SIZE, TILE_SIZE
                 );
             }
         }
@@ -104,16 +103,16 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
             if (holdBlock.image != null) {
                 graphics2D.drawImage(
                         holdBlock.image,
-                        position.x * Main.TILE_SIZE + LEFT_X - 280,
-                        position.y * Main.TILE_SIZE + TOP_Y + 75,
+                        position.x * TILE_SIZE + LEFT_X - 280,
+                        position.y * TILE_SIZE + TOP_Y + 75,
                         null
                 );
             } else {
                 System.out.println("Something is wrong");
                 graphics2D.fillRect(
-                        position.x * Main.TILE_SIZE + LEFT_X - 225,
-                        position.y * Main.TILE_SIZE + TOP_Y + 75,
-                        Main.TILE_SIZE, Main.TILE_SIZE
+                        position.x * TILE_SIZE + LEFT_X - 225,
+                        position.y * TILE_SIZE + TOP_Y + 75,
+                        TILE_SIZE, TILE_SIZE
                 );
             }
         }
@@ -165,7 +164,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
     @Override
     public void run() {
 
-        double drawInterval = (double) 1_000_000_000 / Main.FPS;
+        double drawInterval = (double) 1_000_000_000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -195,6 +194,7 @@ public class GameManager extends JPanel implements Runnable, KeyListener {
             case KeyEvent.VK_LEFT -> gameState.move(Direction.LEFT);
             case KeyEvent.VK_RIGHT -> gameState.move(Direction.RIGHT);
             case KeyEvent.VK_UP -> gameState.rotateCW();
+            case KeyEvent.VK_C -> gameState.rotateCCW();
             case KeyEvent.VK_DOWN -> gameState.moveDownInstantly();
             case KeyEvent.VK_SPACE -> gameState.setHoldBlock();
         }

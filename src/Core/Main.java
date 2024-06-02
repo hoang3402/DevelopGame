@@ -3,14 +3,9 @@ package Core;
 import javax.swing.*;
 import java.io.IOException;
 
+import static Core.Setting.title;
+
 public class Main {
-
-    final static int WIDTH = 1280;
-    final static int HEIGHT = 720;
-    public final static int TILE_SIZE = 30;
-    final static int FPS = 60;
-    final static String title = "Tetris";
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame(title);

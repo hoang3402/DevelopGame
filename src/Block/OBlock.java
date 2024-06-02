@@ -1,6 +1,5 @@
 package Block;
 
-import Core.Main;
 import Helper.BlockIds;
 import Helper.Position;
 
@@ -8,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
+import static Core.Setting.TILE_SIZE;
 
 public class OBlock extends Block {
 
@@ -20,6 +21,6 @@ public class OBlock extends Block {
         };
 
         var _image = image = ImageIO.read(new File("src/assets/tim.jpg"));
-        this.image = _image.getScaledInstance(Main.TILE_SIZE, Main.TILE_SIZE, Image.SCALE_SMOOTH);
+        this.image = _image.getScaledInstance(TILE_SIZE, TILE_SIZE, Image.SCALE_SMOOTH);
     }
 }

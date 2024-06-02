@@ -10,15 +10,15 @@ import java.io.IOException;
 public class GameState {
 
     protected final GameGrid gameGrid;
+    private final int limitDropInterval = 5;
     // Block drop every [dropInterval] frames
     public int dropInterval = 60;
-    private int limitDropInterval = 5;
-    private int counter = 0;
     public int blockCounter = 0;
     protected boolean gameOver = false;
     protected int score = 0;
     BlockQueue blockQueue = new BlockQueue();
     Block currentBlock, nextBlock, holdBlock;
+    private int counter = 0;
 
     public GameState() throws IOException {
         gameGrid = new GameGrid(22, 12);
